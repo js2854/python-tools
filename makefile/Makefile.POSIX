@@ -1,0 +1,32 @@
+CPLUS = g++
+CCOMP = gcc
+LINKER= gcc
+AR_BIN= ar
+RANLIB_BIN= ranlib
+C++ = $(CPLUS)
+CC = $(CCOMP)
+LINK = $(LINKER)
+COMPILER_FLAGS=-D__linux__ -pipe
+INCLUDE_FLAG = -include
+CCFLAGS += $(COMPILER_FLAGS) -Wall
+CORE_LINK_LIBS= -lpthread -ldl -lm -lstdc++ -lcrypt -lrt
+SHARED= -shared
+
+# OPTIMIZATION
+CCFLAGS += -ggdb -g3 -g 
+C++FLAGS = $(CCFLAGS)
+
+.SUFFIXES: .cpp .c .o .xo
+
+.cpp.o:
+	$(C++) $(SERVER) -c -o $*.o $(DEFINES) $(CCFLAGS) $(C++FLAGS) $*.cpp
+
+.cpp.xo:
+	$(C++) -c -o $*.xo $(DEFINES) $(CCFLAGS) $(C++FLAGS) $*.cpp
+
+.c.o:
+	$(CC) $(SERVER) -c -o $*.o $(DEFINES) $(CCFLAGS) $*.c
+.c.xo:
+	$(CC) -c -o $*.xo $(DEFINES) $(CCFLAGS) $*.c
+
+
