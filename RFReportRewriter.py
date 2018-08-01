@@ -5,7 +5,8 @@
 
 import sys
 from pyh import *
-from datetime import timedelta
+import time
+
 
 CHARSET = 'GB2312'
 META = '''<meta http-equiv="Content-Type" content="text/html; charset=%s" /> ''' % CHARSET
@@ -30,6 +31,10 @@ h1 {float: left;margin: 0 0 0.5em 0;width: 75%;} h2 {clear: left;}
 .error-time {width: 11em; white-space: nowrap; color: blue;}
 .level {width: 4.5em;text-align: center;color: #FFCC00;font-weight: bold;} .message {white-space: pre-wrap;}
 </style>'''
+
+
+def time2str(millisec):
+    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(millisec/1000))
 
 
 def generate_bar(passed, failed):
@@ -68,18 +73,22 @@ def generate_stat_table_line(stat_suite):
 
 
 def get_result_stats(orig_report):
-    timestamp, stats = '', []
-    time_keyword = 'window.output["generatedTimestamp"] = '
+    starttime, elapsed, stats = 0, 0, []
+    starttime_keyword = 'window.output["baseMillis"] = '
+    elapsed_keyword = 'window.output["generatedMillis"] = '
     stats_keyword = 'window.output["stats"] = '
     with open(orig_report, 'r') as f:
         for line in f:
-            if line.startswith(time_keyword):
-                timestamp = line[len(time_keyword):-2].strip('"')
+            if line.startswith(starttime_keyword):
+                starttime = int(line[len(starttime_keyword):-2].strip('"'))
+            elif line.startswith(elapsed_keyword):
+                elapsed = int(line[len(elapsed_keyword):-2].strip('"'))
             elif line.startswith(stats_keyword):
                 stats_str = line[len(stats_keyword):-2]
                 stats = eval(stats_str)
+            if starttime and elapsed and stats:
                 break
-    return timestamp, stats
+    return starttime, starttime+elapsed, stats
 
 
 def get_all_stats(totoal_stats):
@@ -92,7 +101,7 @@ def get_all_stats(totoal_stats):
 
 
 def convert(orig_report, new_report):
-    timestamp, result_stats = get_result_stats(orig_report)
+    starttime, endtime, result_stats = get_result_stats(orig_report)
     if not result_stats or len(result_stats) < 3:
         print '###### Get result stats from report file<%s> failed!' % (orig_report)
         return
@@ -120,8 +129,8 @@ def convert(orig_report, new_report):
     html_body << h2('Summary Information')
     details_table = html_body << table(cl='details')
     details_table << tr() << th('Status:') + td(status, cl=cls)
-    # details_table << tr() << th('Start Time:') + td(result.suite.starttime)
-    details_table << tr() << th('End Time:') + td(timestamp)
+    details_table << tr() << th('Start Time:') + td(time2str(starttime))
+    details_table << tr() << th('End Time:') + td(time2str(endtime))
     details_table << tr() << th('Elapsed Time:') + td(elapsed)
 
     stats_div = html_body << div(id="statistics-container")
