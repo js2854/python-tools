@@ -12,24 +12,33 @@ CHARSET = 'GB2312'
 META = '''<meta http-equiv="Content-Type" content="text/html; charset=%s" /> ''' % CHARSET
 CSS = '''<style type="text/css">
 body {font-family: Helvetica, sans-serif; font-size: 0.8em; color: black; padding: 6px; background: white;}
-.bg_pass {background-color: #00F000;} .bg_fail {background-color: #FF3333;}
+.bg_pass {background-color: #9e9;}
+.bg_fail {background-color: #f66;}
 table { table-layout: fixed;word-wrap: break-word;empty-cells: show;font-size: 1em;margin: 0 1px;background: white;}
-th, td {vertical-align: top;} tr {background: white;} th {background: #DCDCF0;color: black;}
-br {mso-data-placement: same-cell;} .parent-name {font-size: 0.7em;letter-spacing: -0.07em;}
-h1 {float: left;margin: 0 0 0.5em 0;width: 75%;} h2 {clear: left;}
-.details {border: 1px solid black;border-collapse: collapse;clear: both;width: 65em;margin-bottom: 1em;}
+th, td {vertical-align: top;}
+tr {background: white;}
+th {background: #ddd;color: black;}
+br {mso-data-placement: same-cell;}
+.parent-name {font-size: 0.7em;letter-spacing: -0.07em;}
+h1 {float: left;margin: 0 0 0.5em 0;width: 75%;}
+h2 {clear: left;}
+.details {border: 1px solid #ccc;border-collapse: collapse;clear: both;width: 65em;margin-bottom: 1em;}
 .details th {background: white;width: 10em;white-space: nowrap;text-align: left;vertical-align: top;padding: 0.2em 0.4em;}
-.details td {vertical-align: top;padding: 0.2em 0.4em;} .error, .fail {color: red !important;font-weight: bold;}
-.pass {color: #009900 !important;} .statistics {width: 65em;border-collapse: collapse;empty-cells: show;margin-bottom: 1em;}
-.statistics tr:hover {background: #ECECF7;cursor: pointer;} .statistics th, .statistics td {border: 1px solid black;padding: 0.1em 0.3em;}
-.statistics th {background-color: #DCDCF0;padding: 0.2em 0.3em;} .statistics td {vertical-align: middle;}
-.stats-col-stat {width: 4.5em;text-align: center;} .stats-col-elapsed {width: 5.5em;text-align: center;}
-.stats-col-name {color: blue;font-weight: bold;} .stats-col-graph {width: 9em;}
-.graph, .empty-graph {border: 1px solid black;width: auto;height: 7px;padding: 0;background: red;}
-.pass-bar, .fail-bar {float: left;height: 100%;} .pass-bar {background: #00F000;}
-#errors {width: 100%;border-spacing: 0;border: 1px solid gray;padding: 0.3em 0.2em;margin: 0.2em 0;}
-.error-time {width: 11em; white-space: nowrap; color: blue;}
-.level {width: 4.5em;text-align: center;color: #FFCC00;font-weight: bold;} .message {white-space: pre-wrap;}
+.details td {vertical-align: top;padding: 0.2em 0.4em;}
+.error, .fail {color: #f33 !important;font-weight: bold;}
+.pass {color: #393 !important;}
+.statistics {width: 65em;border-collapse: collapse;empty-cells: show;margin-bottom: 1em;}
+.statistics tr:hover {background: #f4f4f4;cursor: pointer;}
+.statistics th, .statistics td {border: 1px solid #ccc;padding: 0.1em 0.3em;}
+.statistics th {background-color: #ddd;padding: 0.2em 0.3em;}
+.statistics td {vertical-align: middle;}
+.stats-col-stat {width: 4.5em;text-align: center;}
+.stats-col-elapsed {width: 5.5em;text-align: center;}
+.stats-col-name {color: blue;font-weight: bold;}
+.stats-col-graph {width: 9em;}
+.graph, .empty-graph {border: 1px solid #ccc;width: auto;height: 7px;padding: 0;background: #f33;}
+.pass-bar, .fail-bar {float: left;height: 100%;}
+.pass-bar {background: #1d4;}
 </style>'''
 
 
